@@ -1,0 +1,24 @@
+﻿div.reference-finder-panel h3 {
+	text-decoration: underline;
+}
+
+.reference-finder-container{
+	display: flex;
+}
+.reference-finder-flex {
+	flex-grow: 1;
+}
+
+.reference-finder-text {
+	width: 100%;
+}
+
+.reference-finder-error-message {
+	background-color: #ff9999;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.reference-finder-search-button {
+	margin-bottom: 0.75rem;
+}
