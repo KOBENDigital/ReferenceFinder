@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<dashBoard xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <section alias="Koben.ReferenceFinder"
+           xdt:Locator="Match(alias)"
+           xdt:Transform="InsertIfMissing">
+    <areas>
+      <area>settings</area>
+    </areas>
+    <tab caption="ReferenceFinder">
+      <control>/App_Plugins/Koben.ReferenceFinder/ReferenceFinderDashboard.html</control>
+    </tab>
+  </section>
+</dashBoard>

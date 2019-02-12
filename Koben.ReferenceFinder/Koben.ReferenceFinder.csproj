@@ -224,12 +224,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Transforms\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="App_Plugins\Koben.ReferenceFinder\package.manifest" />
+    <None Include="Koben.ReferenceFinder.nuspec" />
     <None Include="packages.config" />
+    <None Include="Transforms\Dashboard.config.install.xdt" />
+    <None Include="Transforms\Dashboard.config.uninstall.xdt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Plugins\Koben.ReferenceFinder\css\reference-finder.css" />
