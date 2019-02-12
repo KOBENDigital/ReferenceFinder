@@ -2,9 +2,10 @@
 	text-decoration: underline;
 }
 
-.reference-finder-container{
+.reference-finder-container {
 	display: flex;
 }
+
 .reference-finder-flex {
 	flex-grow: 1;
 }
@@ -21,4 +22,8 @@
 
 .reference-finder-search-button {
 	margin-bottom: 0.75rem;
+}
+
+input[type=radio].reference-finder-radio {
+	margin-left: 0.5rem;
 }

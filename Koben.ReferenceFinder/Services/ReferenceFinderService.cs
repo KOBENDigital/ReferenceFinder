@@ -2,47 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using Umbraco.Core.Models;
-using Umbraco.Core.Services;
-using Umbraco.Web;
 
 namespace Koben.ReferenceFinder.Services
 {
 	public class ReferenceFinderService : IReferenceFinderService
 	{
-		private readonly IContentService _ContentService;
-		private readonly UmbracoHelper _Umbraco;
+		private readonly IReferenceFinderContentService _ContentService;
 
-		public ReferenceFinderService(IContentService contentService, UmbracoHelper umbraco)
+		public ReferenceFinderService(IReferenceFinderContentService contentService)
 		{
 			_ContentService = contentService ?? throw new ArgumentNullException(nameof(contentService));
-			_Umbraco = umbraco ?? throw new ArgumentNullException(nameof(umbraco));
 		}
 
-		public IEnumerable<IPublishedContent> FindContentWithReferencesToContent(int contentId)
+		public IEnumerable<IPublishedContent> FindContentWithReferences(int contentId)
 		{
-			List<IPublishedContent> haveReferences = new List<IPublishedContent>();
+			Dictionary<int, IPublishedContent> haveReferences = new Dictionary<int, IPublishedContent>();
 			
-			foreach (var content in _Umbraco.TypedContentAtRoot())
+			foreach (var content in _ContentService.TypedContentAtRoot())
 			{
 				FindContentWithReferencesToContent_Recursive(contentId, content, haveReferences);
 			}
 
-			return haveReferences;
+			return haveReferences.Values;
 		}
 
-		public IEnumerable<IPublishedContent> FindContentWithReferencesToMedia(int mediaId)
-		{
-			List<IPublishedContent> haveReferences = new List<IPublishedContent>();
-
-			foreach (var content in _Umbraco.TypedContentAtRoot())
-			{
-				FindContentWithReferencesToMedia_Recursive(mediaId, content, haveReferences);
-			}
-
-			return haveReferences;
-		}
-
-		private void FindContentWithReferencesToContent_Recursive(int contentId, IPublishedContent content, List<IPublishedContent> haveReferences)
+		private void FindContentWithReferencesToContent_Recursive(int contentId, IPublishedContent content, Dictionary<int, IPublishedContent> haveReferences)
 		{
 			foreach (var property in content.Properties)
 			{
@@ -50,10 +34,10 @@ namespace Koben.ReferenceFinder.Services
 
 				if (publishedContent != null)
 				{
-					if (publishedContent.Id == contentId)
+					if (publishedContent.Id == contentId && !haveReferences.ContainsKey(content.Id))
 					{
-						haveReferences.Add(content);
-						return;
+						haveReferences.Add(content.Id, content);
+						break;
 					}
 
 					FindContentWithReferencesToContent_Recursive(contentId, publishedContent, haveReferences);
@@ -66,10 +50,10 @@ namespace Koben.ReferenceFinder.Services
 				{
 					foreach (var listContent in publishedContentCollection)
 					{
-						if (listContent.Id == contentId)
+						if (listContent.Id == contentId && !haveReferences.ContainsKey(content.Id))
 						{
-							haveReferences.Add(content);
-							return;
+							haveReferences.Add(content.Id, content);
+							break;
 						}
 
 						FindContentWithReferencesToContent_Recursive(contentId, listContent, haveReferences);
@@ -77,38 +61,10 @@ namespace Koben.ReferenceFinder.Services
 					}
 				}
 			}
-		}
 
-		private void FindContentWithReferencesToMedia_Recursive(int mediaId, IPublishedContent content, List<IPublishedContent> haveReferences)
-		{
-			foreach (var property in content.Properties)
+			foreach (var child in content.Children)
 			{
-				IMedia media = property.Value as IMedia;
-
-				if (media != null && media.Id == mediaId)
-				{
-					haveReferences.Add(content);
-					continue;
-				}
-
-				IPublishedContent publishedContent = property.Value as IPublishedContent;
-
-				if (publishedContent != null)
-				{
-					FindContentWithReferencesToMedia_Recursive(mediaId, publishedContent, haveReferences);
-					continue;
-				}
-
-				IEnumerable<IPublishedContent> publishedContentCollection = property.Value as IEnumerable<IPublishedContent>;
-
-				if (publishedContentCollection != null && publishedContentCollection.Any())
-				{
-					foreach (var listContent in publishedContentCollection)
-					{
-						FindContentWithReferencesToMedia_Recursive(mediaId, listContent, haveReferences);
-						continue;
-					}
-				}
+				FindContentWithReferencesToContent_Recursive(contentId, child, haveReferences);
 			}
 		}
 	}
