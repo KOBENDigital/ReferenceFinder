@@ -12,5 +12,6 @@ namespace Koben.ReferenceFinder.Services
 	{
 		IEnumerable<IPublishedContent> TypedContentAtRoot();
 		IPublishedContent TypedContent(Uri uri);
+		IPublishedContent TypedContent(int id);
 	}
 }

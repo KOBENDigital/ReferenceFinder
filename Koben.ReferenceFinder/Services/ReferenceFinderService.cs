@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using Umbraco.Core.Models;
+using Umbraco.Web.PublishedCache.XmlPublishedCache;
 
 namespace Koben.ReferenceFinder.Services
 {
@@ -28,37 +31,66 @@ namespace Koben.ReferenceFinder.Services
 
 		private void FindContentWithReferencesToContent_Recursive(int contentId, IPublishedContent content, Dictionary<int, IPublishedContent> haveReferences)
 		{
-			foreach (var property in content.Properties)
+			foreach (var property in content.Properties.Where(p => p.HasValue))
 			{
-				IPublishedContent publishedContent = property.Value as IPublishedContent;
+				var type = property.GetType();
+				var propertyTypeProp = type.GetField("PropertyType");
 
-				if (publishedContent != null)
+				if (propertyTypeProp == null)
 				{
-					if (publishedContent.Id == contentId && !haveReferences.ContainsKey(content.Id))
+					continue;
+				}
+
+				var propertyType = propertyTypeProp.GetValue(property);
+				var propertyTypeType = propertyType.GetType();
+				var propertyEditorAliasProp = propertyTypeType.GetProperty("PropertyEditorAlias");
+
+				if (propertyEditorAliasProp == null)
+				{
+					continue;
+				}
+
+				var propertyEditorAlias = propertyEditorAliasProp.GetValue(propertyType)?.ToString();
+
+				Regex pattern = new Regex(@"Umbraco\.ContentPicker|Umbraco\.MediaPicker");
+
+				if (!pattern.IsMatch(propertyEditorAlias ?? ""))
+				{
+					continue;
+				}
+
+				if (int.TryParse(property.Value.ToString(), out int propertyContentId))
+				{
+					if (contentId == propertyContentId && !haveReferences.ContainsKey(content.Id))
 					{
 						haveReferences.Add(content.Id, content);
 						break;
 					}
 
-					FindContentWithReferencesToContent_Recursive(contentId, publishedContent, haveReferences);
+					var innerContent = _ContentService.TypedContent(propertyContentId);
+					FindContentWithReferencesToContent_Recursive(contentId, innerContent, haveReferences);
 					continue;
 				}
 
-				IEnumerable<IPublishedContent> publishedContentCollection = property.Value as IEnumerable<IPublishedContent>;
+				int[] publishedContentCollection = (property.Value as IEnumerable<int>)?.ToArray();
 
 				if (publishedContentCollection != null && publishedContentCollection.Any())
 				{
-					foreach (var listContent in publishedContentCollection)
+					foreach (var id in publishedContentCollection)
 					{
-						if (listContent.Id == contentId && !haveReferences.ContainsKey(content.Id))
+						if (id == contentId && !haveReferences.ContainsKey(content.Id))
 						{
 							haveReferences.Add(content.Id, content);
 							break;
 						}
-
+						
+						var listContent = _ContentService.TypedContent(propertyContentId);
 						FindContentWithReferencesToContent_Recursive(contentId, listContent, haveReferences);
-						continue;
 					}
+				}
+
+				if (publishedContentCollection != null && publishedContentCollection.Any())
+				{
 				}
 			}
 

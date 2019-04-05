@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <files>
+    <file>
+      <guid>Koben.ReferenceFinder.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Koben.ReferenceFinder.dll</orgName>
+    </file>
+    <file>
+      <guid>Koben.ReferenceFinder.Dashboard.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Koben.ReferenceFinder.Dashboard.dll</orgName>
+    </file>
+    <file>
+      <guid>ReferenceFinderDashboard.html</guid>
+      <orgPath>/App_Plugins/Koben.ReferenceFinder</orgPath>
+      <orgName>ReferenceFinderDashboard.html</orgName>
+    </file>
+    <file>
+      <guid>package.manifest</guid>
+      <orgPath>/App_Plugins/Koben.ReferenceFinder</orgPath>
+      <orgName>package.manifest</orgName>
+    </file>
+    <file>
+      <guid>ReferenceFinder.css</guid>
+      <orgPath>/App_Plugins/Koben.ReferenceFinder/css</orgPath>
+      <orgName>reference-finder.css</orgName>
+    </file>
+    <file>
+      <guid>reference-finder.js</guid>
+      <orgPath>/App_Plugins/Koben.ReferenceFinder/js</orgPath>
+      <orgName>ReferenceFinder.js</orgName>
+    </file>
+  </files>
+  <info>
+    <package>
+      <name>Koben.ReferenceFinder</name>
+      <version>{version}</version>
+      <iconUrl>https://koben.com.au/media/1047/koben_logo.png</iconUrl>
+      <license url="http://opensource.org/licenses/MIT">MIT License</license>
+      <url>https://github.com/KOBENDigital/ReferenceFinder</url>
+      <requirements type="strict">
+        <major>7</major>
+        <minor>3</minor>
+        <patch>0</patch>
+      </requirements>
+    </package>
+    <author>
+      <name>EwneoN</name>
+      <website>https://www.koben.com.au</website>
+    </author>
+    <readme><![CDATA[Readme found here:
+https://github.com/KOBENDigital/ReferenceFinder]]></readme>
+  </info>
+  <DocumentTypes />
+  <Templates />
+  <Stylesheets />
+  <Macros />
+  <DictionaryItems />
+  <Languages />
+  <DataTypes />
+  <Actions>
+    <Action runat="install" undo="true" alias="addDashboardSection" dashboardAlias="ReferenceFinderDashboardSection">
+      <section alias="Koben.ReferenceFinder">
+        <areas>
+          <area>settings</area>
+        </areas>
+        <tab caption="ReferenceFinder">
+          <control>/App_Plugins/Koben.ReferenceFinder/ReferenceFinderDashboard.html</control>
+        </tab>
+      </section>
+    </Action>
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.Certificate.Thumbprint" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.Certificate.StoreName" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.Certificate.StoreLocation" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.Certificate.ValidOnly" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.ApiKey.ClientId" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.ApiKey.ClientSecret" value="example" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.ApiKey.ClientsConfigPath" value="example-secret" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.GetDocumentTypesForComparisonPath" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.AuthenticationMode" value="Key" />
+  </Actions>
+</umbPackage>

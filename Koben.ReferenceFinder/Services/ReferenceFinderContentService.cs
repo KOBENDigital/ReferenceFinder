@@ -26,5 +26,10 @@ namespace Koben.ReferenceFinder.Services
 		{
 			return _UmbracoContext.ContentCache.GetByRoute(uri.LocalPath);
 		}
+
+		public IPublishedContent TypedContent(int id)
+		{
+			return _UmbracoHelper.TypedContent(id);
+		}
 	}
 }

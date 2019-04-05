@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koben.ReferenceFinder.Dashboard", "Koben.ReferenceFinder.Dashboard\Koben.ReferenceFinder.Dashboard.csproj", "{4FA269D0-3F00-4ACF-B2B7-50CCD2C26266}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koben.ReferenceFinder.Example", "Koben.ReferenceFinder.Example\Koben.ReferenceFinder.Example.csproj", "{8747D58C-F777-402C-9C41-0B31FEB66FB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{2CCB617B-1F10-43A1-B4F6-4137454E5596}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CCB617B-1F10-43A1-B4F6-4137454E5596}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CCB617B-1F10-43A1-B4F6-4137454E5596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA269D0-3F00-4ACF-B2B7-50CCD2C26266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA269D0-3F00-4ACF-B2B7-50CCD2C26266}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA269D0-3F00-4ACF-B2B7-50CCD2C26266}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA269D0-3F00-4ACF-B2B7-50CCD2C26266}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8747D58C-F777-402C-9C41-0B31FEB66FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8747D58C-F777-402C-9C41-0B31FEB66FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8747D58C-F777-402C-9C41-0B31FEB66FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8747D58C-F777-402C-9C41-0B31FEB66FB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

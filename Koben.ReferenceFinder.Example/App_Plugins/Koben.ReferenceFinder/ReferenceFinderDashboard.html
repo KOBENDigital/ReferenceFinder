@@ -1,0 +1,99 @@
+﻿<div ng-controller="referenceFinder.dashboardController">
+  <div class="reference-finder-header">
+    <div class="reference-finder-intro-message">
+      <div>
+        <h4>Enter a URL to a content or media item or use the Browse button to select either a content or media item.</h4>
+      </div>
+    </div>
+    <div class="reference-finder-error-message" ng-if="vm.hasError">
+      <div><strong><em>{{vm.errorMessage}}</em></strong></div>
+    </div>
+    <form class="form ng-pristine ng-valid" novalidate>
+      <div class="umb-table">
+        <div class="umb-table-head">
+          <div class="umb-table-row">
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b3 not-fixed">
+              Search Type
+            </div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b3">
+              Target Url
+            </div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b1">
+              Target Id
+            </div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b2"></div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b2"></div>
+          </div>
+        </div>
+        <div class="umb-table-body">
+          <div class="umb-table-row">
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b3 not-fixed">
+              <input type="radio" class="reference-finder-radio" ng-model="vm.searchType" name="searchType" value="content"/> Content
+              <input type="radio" class="reference-finder-radio" ng-model="vm.searchType" name="searchType" value="media"/> Media
+            </div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b4">
+              <input type="text" class="reference-finder-text form-control ng-pristine ng-valid" ng-model="vm.targetUrl"
+                     placeholder="http://... or https://.." prevent-enter-submit no-dirty-check/>
+            </div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b3">{{vm.targetId !== null ? ('Id: ' + vm.targetId) : ''}}</div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b2">
+              <button type="button" class="umb-era-button umb-button--s -blue reference-finder-search-button"
+                      ng-click="browse()">
+                Browse
+              </button>
+            </div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b2">
+              <button type="button" class="umb-era-button umb-button--s -blue reference-finder-search-button"
+                      ng-click="search()">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="reference-finder-panel">
+    <h3>Search Results</h3>
+    <div class="reference-finder-container">
+      <div class="reference-finder-flex">
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell flx-s1 flx-g1 flx-b2 not-fixed">
+                Id
+              </div>
+              <div class="umb-table-cell flx-s1 flx-g1 flx-b4">
+                Name
+              </div>
+              <div class="umb-table-cell flx-s1 flx-g1 flx-b4">
+                Url
+              </div>
+              <div class="umb-table-cell flx-s1 flx-g1 flx-b2"></div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row reference-finder-row" ng-repeat="reference in vm.results.References | orderBy: Name">
+              <div class="umb-table-cell flx-s1 flx-g1 flx-b2 not-fixed">
+                <h4>{{reference.Id}}</h4>
+              </div>
+              <div class="umb-table-cell flx-s1 flx-g1 flx-b5">
+                <h4>{{reference.Name}}</h4>
+              </div>
+              <div class="umb-table-cell flx-s1 flx-g1 flx-b5">
+                <h4><a href="{{reference.Url}}" target="_blank">{{reference.Url}}</a></h4>
+              </div>
+              <div class="umb-table-cell flx-s1 flx-g1 flx-b2">
+                <a class="umb-era-button umb-button--s -blue reference-finder-search-button"
+                   href="/umbraco#/content/content/edit/{{reference.Id}}"
+                   target="_blank">
+                  Edit
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

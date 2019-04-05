@@ -1,0 +1,8 @@
+{
+  "javascript": [
+    "~/app_plugins/Koben.ReferenceFinder/js/reference-finder.js"
+  ],
+  "css": [
+    "~/app_plugins/Koben.ReferenceFinder/css/reference-finder.css"
+  ]
+}
