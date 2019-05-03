@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/KOBENDigital/ReferenceFinder</projectUrl>
     <iconUrl>https://koben.com.au/media/1047/koben_logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Koben.Kompair.ReferenceFinder is an Umbraco dashboard for the Koben.ReferenceFinder library.</description>
+    <description>Koben.ReferenceFinder.Dashboard is an Umbraco dashboard for the Koben.ReferenceFinder library.</description>
     <copyright>Copyright 2019</copyright>
     <tags>umbraco</tags>
     <dependencies>

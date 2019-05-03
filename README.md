@@ -55,5 +55,10 @@ Testing on new releases will be performed as they come out.
 - Nuspec work
 - Umbraco package work
 - Added CI scripts 
+- README work.
+
+### 0.1.3
+- README work.
+- Nuget package description fix
 
 Handmade by Samuel Butler - 2019 @KobenDigital
