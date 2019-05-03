@@ -6,5 +6,7 @@ namespace Koben.ReferenceFinder.Services
 	public interface IReferenceFinderService
 	{
 		IEnumerable<IPublishedContent> FindContentWithReferences(int contentId);
+
+		IEnumerable<IPublishedContent> FindContentWithReferences(string documentType);
 	}
 }

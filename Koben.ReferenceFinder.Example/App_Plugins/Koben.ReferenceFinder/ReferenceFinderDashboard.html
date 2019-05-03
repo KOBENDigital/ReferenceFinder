@@ -2,7 +2,7 @@
   <div class="reference-finder-header">
     <div class="reference-finder-intro-message">
       <div>
-        <h4>Enter a URL to a content or media item or use the Browse button to select either a content or media item.</h4>
+        <h4>Enter a URL to a content or media item, alias for a document type or use the Browse button to select content, media or a document type.</h4>
       </div>
     </div>
     <div class="reference-finder-error-message" ng-if="vm.hasError">
@@ -16,7 +16,7 @@
               Search Type
             </div>
             <div class="umb-table-cell flx-s1 flx-g1 flx-b3">
-              Target Url
+              Target Content/Media Name/Url or Document Type Alias
             </div>
             <div class="umb-table-cell flx-s1 flx-g1 flx-b1">
               Target Id
@@ -28,22 +28,25 @@
         <div class="umb-table-body">
           <div class="umb-table-row">
             <div class="umb-table-cell flx-s1 flx-g1 flx-b3 not-fixed">
-              <input type="radio" class="reference-finder-radio" ng-model="vm.searchType" name="searchType" value="content"/> Content
-              <input type="radio" class="reference-finder-radio" ng-model="vm.searchType" name="searchType" value="media"/> Media
+              <input type="radio" class="reference-finder-radio" ng-model="vm.searchType" name="searchType" value="content" /> Content
+              <input type="radio" class="reference-finder-radio" ng-model="vm.searchType" name="searchType" value="media" /> Media
+              <input type="radio" class="reference-finder-radio" ng-model="vm.searchType" name="searchType" value="documentType" /> Content of Document Type
             </div>
             <div class="umb-table-cell flx-s1 flx-g1 flx-b4">
+              <input type="text" class="reference-finder-text form-control ng-pristine ng-valid" ng-model="vm.targetDocumentType.alias"
+                     ng-if="vm.searchType === 'documentType'" placeholder="Document Type Alias" prevent-enter-submit no-dirty-check />
               <input type="text" class="reference-finder-text form-control ng-pristine ng-valid" ng-model="vm.targetUrl"
-                     placeholder="http://... or https://.." prevent-enter-submit no-dirty-check/>
+                     ng-if="vm.searchType !== 'documentType'" placeholder="http://... or https://.." prevent-enter-submit no-dirty-check />
             </div>
-            <div class="umb-table-cell flx-s1 flx-g1 flx-b3">{{vm.targetId !== null ? ('Id: ' + vm.targetId) : ''}}</div>
+            <div class="umb-table-cell flx-s1 flx-g1 flx-b3">{{getIdString()}}</div>
             <div class="umb-table-cell flx-s1 flx-g1 flx-b2">
-              <button type="button" class="umb-era-button umb-button--s -blue reference-finder-search-button"
+              <button type="button" class="umb-era-button umb-button--s -blue reference-finder-button"
                       ng-click="browse()">
                 Browse
               </button>
             </div>
             <div class="umb-table-cell flx-s1 flx-g1 flx-b2">
-              <button type="button" class="umb-era-button umb-button--s -blue reference-finder-search-button"
+              <button type="button" class="umb-era-button umb-button--s -blue reference-finder-button"
                       ng-click="search()">
                 Search
               </button>
@@ -84,10 +87,10 @@
                 <h4><a href="{{reference.Url}}" target="_blank">{{reference.Url}}</a></h4>
               </div>
               <div class="umb-table-cell flx-s1 flx-g1 flx-b2">
-                <a class="umb-era-button umb-button--s -blue reference-finder-search-button"
+                <a class="umb-era-button umb-button--s -blue reference-finder-button"
                    href="/umbraco#/content/content/edit/{{reference.Id}}"
                    target="_blank">
-                  Edit
+                  Edit Content
                 </a>
               </div>
             </div>
@@ -96,4 +99,12 @@
       </div>
     </div>
   </div>
+
+  <umb-overlay 
+    id="krf_treepicker"
+    ng-show="treePickerOverlay.show"
+    model="treePickerOverlay"
+    view="treePickerOverlay.view"
+    position="right">
+  </umb-overlay>
 </div>

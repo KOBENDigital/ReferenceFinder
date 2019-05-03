@@ -242,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Plugins\Koben.ReferenceFinder\css\reference-finder.css" />
+    <Content Include="App_Plugins\Koben.ReferenceFinder\html\DocumentTypePicker.html" />
     <Content Include="App_Plugins\Koben.ReferenceFinder\js\reference-finder.js" />
     <Content Include="App_Plugins\Koben.ReferenceFinder\ReferenceFinderDashboard.html" />
     <Content Include="Config\grid.editors.config.js" />

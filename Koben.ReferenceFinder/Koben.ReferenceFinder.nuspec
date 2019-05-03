@@ -14,15 +14,7 @@
     <copyright>Copyright 2019</copyright>
     <tags>umbraco</tags>
     <dependencies>
-      <dependency id="UmbracoCms.Core" version="[7.13,]" />
+      <dependency id="UmbracoCms.Core" version="7.0.0" />
     </dependencies>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.Web" />
-    </frameworkAssemblies>
   </metadata>
-  <files>
-    <file src="App_Plugins\Koben.ReferenceFinder\**\*.*" target="content\App_Plugins\Koben.ReferenceFinder\" />
-    <file src="Transforms\Dashboard.config.install.xdt" target="content\Config" />
-    <file src="Transforms\Dashboard.config.uninstall.xdt" target="content\Config" />
-  </files>
 </package>

@@ -232,15 +232,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="DTOs\DocumentTypeDTO.cs" />
+    <Compile Include="DTOs\SearchByDocumentTypeRequest.cs" />
     <Compile Include="DTOs\SearchByIdRequest.cs" />
     <Compile Include="DTOs\SearchByUrlRequest.cs" />
     <Compile Include="DTOs\SearchResult.cs" />
     <Compile Include="DTOs\SearchResultItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IReferenceFinderContentService.cs" />
+    <Compile Include="Services\IReferenceFinderDocumentTypesService.cs" />
     <Compile Include="Services\IReferenceFinderMediaService.cs" />
     <Compile Include="Services\IReferenceFinderService.cs" />
     <Compile Include="Services\ReferenceFinderContentService.cs" />
+    <Compile Include="Services\ReferenceFinderDocumentTypesService.cs" />
     <Compile Include="Services\ReferenceFinderMediaService.cs" />
     <Compile Include="Services\ReferenceFinderService.cs" />
   </ItemGroup>

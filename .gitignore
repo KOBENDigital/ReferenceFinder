@@ -259,3 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+*/App_Data/cache
+*/App_Data/Logs
+*/App_Data/NuGetBackup/20190503-110302
+*/App_Data/TEMP
+*/App_Data/umbraco.config

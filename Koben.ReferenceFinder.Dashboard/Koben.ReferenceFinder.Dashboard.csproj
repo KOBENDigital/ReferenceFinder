@@ -237,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Plugins\Koben.ReferenceFinder\css\reference-finder.css" />
+    <Content Include="App_Plugins\Koben.ReferenceFinder\html\DocumentTypePicker.html" />
     <Content Include="App_Plugins\Koben.ReferenceFinder\js\reference-finder.js" />
     <Content Include="App_Plugins\Koben.ReferenceFinder\ReferenceFinderDashboard.html" />
     <Content Include="package.xml" />
@@ -244,6 +245,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="App_Plugins\Koben.ReferenceFinder\package.manifest" />
+    <None Include="Koben.ReferenceFinder.Dashboard.nuspec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -265,6 +267,10 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)App_Plugins\Koben.ReferenceFinder" "$(SolutionDir)Koben.ReferenceFinder.Example\App_Plugins\Koben.ReferenceFinder\" /Y /E
 xcopy "$(ProjectDir)$(OutDir)Koben.ReferenceFinder.dll" "$(SolutionDir)Koben.ReferenceFinder.Example\bin\" /Y /I
-xcopy "$(ProjectDir)$(OutDir)Koben.ReferenceFinder.Dashboard.dll" "$(SolutionDir)Koben.ReferenceFinder.Example\bin\" /Y /I</PostBuildEvent>
+xcopy "$(ProjectDir)$(OutDir)Koben.ReferenceFinder.Dashboard.dll" "$(SolutionDir)Koben.ReferenceFinder.Example\bin\" /Y /I
+
+xcopy "$(ProjectDir)App_Plugins\Koben.ReferenceFinder" "$(SolutionDir)Koben.ReferenceFinder.Example.v14\App_Plugins\Koben.ReferenceFinder\" /Y /E
+xcopy "$(ProjectDir)$(OutDir)Koben.ReferenceFinder.dll" "$(SolutionDir)Koben.ReferenceFinder.Example.v14\bin\" /Y /I
+xcopy "$(ProjectDir)$(OutDir)Koben.ReferenceFinder.Dashboard.dll" "$(SolutionDir)Koben.ReferenceFinder.Example.v14\bin\" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -1,0 +1,67 @@
+stages:
+- build
+- publish
+- deploy
+
+build_job:
+  stage: build
+  except:
+    - tags
+    - master
+  script:
+    - 'set MSBUILDDISABLENODEREUSE=1'
+    - 'echo Restoring NuGet Packages...'
+    - '"c:\nuget\nuget.exe" restore "Koben.ReferenceFinder.sln"'
+    - 'echo NuGet Packages restored'
+    - 'echo Debug build...'
+    - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Debug /verbosity:quiet /m:4 /nr:false "Koben.ReferenceFinder.sln"'
+    - 'echo Build completed'
+    - 'echo Cleaning up..'
+    - 'DEL /Q "."'
+    - 'echo Build cleaned'
+
+publish_job:
+  stage: publish
+  only:
+    - master
+    - tags
+  script:
+    - 'set MSBUILDDISABLENODEREUSE=1'
+    - 'echo Restoring NuGet Packages...'
+    - '"c:\nuget\nuget.exe" restore "Koben.ReferenceFinder.sln"'
+    - 'echo NuGet Packages restored'
+    - 'echo Release build...'
+    - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet /m:4 /nr:false "Koben.ReferenceFinder.sln"'
+    - 'echo Build completed'
+    - 'echo Creating Umbraco Package'
+    - 'powershell -File .\CreateUmbracoPackage.ps1 -packageDirectory .\Koben.ReferenceFinder.Dashboard\ -buildConfiguration Release'
+  artifacts:
+    name: Koben.ReferenceFinder
+    paths:
+    - 'Koben.ReferenceFinder\bin\Release'
+    - 'Koben.ReferenceFinder.Dashboard\bin\Release'
+    - 'Koben.ReferenceFinder.zip'
+
+deploy_job:
+  stage: deploy
+  only:
+    - tags
+  script:  
+    - 'set MSBUILDDISABLENODEREUSE=1'
+    - 'echo Restoring NuGet Packages...'
+    - '"c:\nuget\nuget.exe" restore "Koben.ReferenceFinder.sln"'
+    - 'echo NuGet Packages restored'
+    - 'echo Release build...'
+    - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet /m:4 /nr:false "Koben.ReferenceFinder.sln"'
+    - 'echo Build completed'
+    - 'echo Deploying NuGet Package...'
+    - 'cd Koben.ReferenceFinder\'
+    - '"c:\nuget\nuget.exe" pack Koben.ReferenceFinder.csproj -Prop Configuration=Release'
+    - '"c:\nuget\nuget.exe" push Koben.ReferenceFinder.*.nupkg -Source https://api.nuget.org/v3/index.json'
+    - 'cd ..'
+    - 'cd Koben.ReferenceFinder.Dashboard\'
+    - '"c:\nuget\nuget.exe" pack Koben.ReferenceFinder.Dashboard.csproj -Prop Configuration=Release'
+    - '"c:\nuget\nuget.exe" push Koben.ReferenceFinder.Dashboard.*.nupkg -Source https://api.nuget.org/v3/index.json'
+    - 'echo NuGet Package deployed'
+  dependencies:
+    - publish_job

@@ -22,6 +22,11 @@
       <orgName>package.manifest</orgName>
     </file>
     <file>
+      <guid>DocumentTypePicker.html</guid>
+      <orgPath>/App_Plugins/Koben.ReferenceFinder/html</orgPath>
+      <orgName>DocumentTypePicker.html</orgName>
+    </file>
+    <file>
       <guid>ReferenceFinder.css</guid>
       <orgPath>/App_Plugins/Koben.ReferenceFinder/css</orgPath>
       <orgName>reference-finder.css</orgName>
@@ -70,14 +75,5 @@ https://github.com/KOBENDigital/ReferenceFinder]]></readme>
         </tab>
       </section>
     </Action>
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.Certificate.Thumbprint" value="" />
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.Certificate.StoreName" value="" />
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.Certificate.StoreLocation" value="" />
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.Certificate.ValidOnly" value="" />
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.ApiKey.ClientId" value="" />
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.ApiKey.ClientSecret" value="example" />
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.ApiKey.ClientsConfigPath" value="example-secret" />
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.GetDocumentTypesForComparisonPath" value="" />
-    <Action runat="install" undo="true" alias="AddAppConfigKey" key="ReferenceFinder.AuthenticationMode" value="Key" />
   </Actions>
 </umbPackage>

@@ -34,10 +34,10 @@ Search for media by URL does not currently work. Please use the browse button th
 
 ## Umbraco Versions
 ReferenceFinder has been tested with Umbraco versions:
-- 7.13.0
-- 7.13.1
+- 7.3.0
+- 7.14.0
 
-More testing on earlier versions is planned and contributers are more than welcome here :)
+More testing on earlier versions is planned and contributors are more than welcome here :)
 Testing on new releases will be performed as they come out.
 
 ## Changelog
@@ -47,5 +47,13 @@ Testing on new releases will be performed as they come out.
 - README work.
 - Upped assembly version to 0.1.1.
 
+### 0.1.2
+- Added ability to search by document type
+- Improved media and content browsing
+- Styling work
+- Testing and QA
+- Nuspec work
+- Umbraco package work
+- Added CI scripts 
 
 Handmade by Samuel Butler - 2019 @KobenDigital

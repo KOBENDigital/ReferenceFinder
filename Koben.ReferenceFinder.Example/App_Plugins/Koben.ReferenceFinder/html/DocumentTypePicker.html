@@ -1,0 +1,12 @@
+﻿<div ng-controller="referenceFinder.documentTypeDialogController">
+  <div class="umb-panel-header">
+    <div class="umb-el-wrap umb-panel-buttons">
+      <div>
+        Select a Document Type
+        <select ng-model="vm.selectedDocumentType" ng-change="documentTypeSelected()">
+          <option ng-repeat="documentType in vm.documentTypes" label="{{documentType.Name}}" value="{{documentType.Id}}"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

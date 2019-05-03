@@ -20,10 +20,14 @@
 	margin-bottom: 1rem;
 }
 
-.reference-finder-search-button {
+.reference-finder-button {
 	margin-bottom: 0.75rem;
 }
 
 input[type=radio].reference-finder-radio {
 	margin-left: 0.5rem;
+}
+
+.reference-finder-intro-message {
+	padding-bottom: 1rem;
 }
